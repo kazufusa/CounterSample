@@ -1,9 +1,6 @@
 package kazufusa.countersample
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.*
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewModel.changeNotifier.observe(this, changeObserver)
+        lifecycle.addObserver(viewModel)
         my_container.setOnClickListener { viewModel.increment() }
     }
 
@@ -30,7 +28,11 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-class MyViewModel(private var count: Int = 0) : ViewModel() {
+class MyViewModel(private var count: Int = 0) : ViewModel(), LifecycleObserver {
     val changeNotifier = MutableLiveData<Int>()
     fun increment() { changeNotifier.value = ++count }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    fun onResume() { increment() }
 }
+
