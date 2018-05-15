@@ -4,5 +4,8 @@ from https://medium.com/@elye.project/android-architecture-components-for-dummie
 
 # testing
 
+- https://github.com/nektar95/AppDemo/stargazers
+
 - https://medium.com/exploring-android/android-architecture-components-testing-your-viewmodel-livedata-70177af89c6e
 - https://brightinventions.pl/blog/testing-android-viewmodels/
+- https://github.com/Helabs/mvvm-android-example

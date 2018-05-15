@@ -10,10 +10,9 @@ class MainActivity : AppCompatActivity() {
         ViewModelProviders.of(this).get(MyViewModel::class.java)
     }
 
-    private val changeObserver =
-            Observer<Int> {
-                value -> value?.let { incrementCount(value) }
-            }
+    private val changeObserver = Observer<Int> {
+        value -> value?.let { incrementCount(value) }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
