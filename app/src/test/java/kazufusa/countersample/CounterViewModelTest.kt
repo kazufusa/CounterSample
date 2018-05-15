@@ -7,8 +7,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
-class MyViewModelTest {
-    private lateinit var myViewModel: MyViewModel
+class CounterViewModelTest {
+    private lateinit var counterViewModel: CounterViewModel
 
     @Rule
     @JvmField
@@ -16,14 +16,14 @@ class MyViewModelTest {
 
     @Before
     fun setUp() {
-        myViewModel = MyViewModel()
+        counterViewModel = CounterViewModel()
     }
 
     @Test
     fun `increment counter from zero to one`(){
-        myViewModel.increment()
-        assertEquals(1, myViewModel.changeNotifier.value)
-        myViewModel.increment()
-        assertEquals(2, myViewModel.changeNotifier.value)
+        counterViewModel.increment()
+        assertEquals(1, counterViewModel.changeNotifier.value)
+        counterViewModel.increment()
+        assertEquals(2, counterViewModel.changeNotifier.value)
     }
 }
