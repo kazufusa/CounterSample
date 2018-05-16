@@ -5,7 +5,12 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
 class CounterViewModel(private var count: Int = 0) : ViewModel(), LifecycleObserver {
-    val counter = MutableLiveData<Counter>()
+    private val counter = MutableLiveData<Counter>()
+
+    fun getCounter() : LiveData<Counter> {
+        return counter
+    }
+
     fun increment() { counter.value = Counter(1, count++) }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)

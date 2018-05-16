@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        counterViewModel.counter.observe(this, changeObserver)
+        counterViewModel.getCounter().observe(this, changeObserver)
         lifecycle.addObserver(counterViewModel)
         my_container.setOnClickListener { counterViewModel.increment() }
     }
