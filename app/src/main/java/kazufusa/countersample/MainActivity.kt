@@ -7,8 +7,11 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var viewModelFactory: ViewModelFactory
+
     private val counterViewModel: CounterViewModel by lazy {
-        ViewModelProviders.of(this).get(CounterViewModel::class.java)
+        viewModelFactory = Injection.provideViewModelFactory(this)
+        ViewModelProviders.of(this, viewModelFactory).get(CounterViewModel::class.java)
     }
 
     private val changeObserver = Observer<Counter> {
