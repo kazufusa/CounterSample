@@ -11,19 +11,19 @@ class MainActivity : AppCompatActivity() {
         ViewModelProviders.of(this).get(CounterViewModel::class.java)
     }
 
-    private val changeObserver = Observer<Int> {
-        value -> value?.let { incrementCount(value) }
+    private val changeObserver = Observer<Counter> {
+        counter -> counter?.let { incrementCount(counter.count) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        counterViewModel.changeNotifier.observe(this, changeObserver)
+        counterViewModel.counter.observe(this, changeObserver)
         lifecycle.addObserver(counterViewModel)
         my_container.setOnClickListener { counterViewModel.increment() }
     }
 
-    private fun incrementCount(value: Int) {
-        my_text.text = (value).toString()
+    private fun incrementCount(count: Int) {
+        my_text.text = (count).toString()
     }
 }
