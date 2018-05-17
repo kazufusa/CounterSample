@@ -10,7 +10,15 @@ from https://medium.com/@elye.project/android-architecture-components-for-dummie
 - https://brightinventions.pl/blog/testing-android-viewmodels/
 - https://github.com/Helabs/mvvm-android-example
 
-# Dagger2
+# Dagger2 sample
 
 - https://medium.com/@elye.project/dagger-2-for-dummies-in-kotlin-with-one-page-simple-code-project-618a5f9f2fe8
 - https://medium.com/@elye.project/dagger-2-for-dummies-in-kotlin-provides-and-module-b84dca1b0d03
+
+# Dagger2 application
+
+- google github browser sample
+- https://github.com/satorufujiwara/kotlin-architecture-components
+- https://qiita.com/satorufujiwara/items/0f95ccfc3820d3ee1370#dagger2
+- https://qiita.com/satorufujiwara/items/f42b176404287690f1d0
+- https://speakerdeck.com/satorufujiwara/kotlin-x-architecture-components
