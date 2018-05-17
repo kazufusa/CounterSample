@@ -4,18 +4,27 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
 import dagger.Provides
+import dagger.android.AndroidInjector
+import dagger.android.ContributesAndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
+import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     private lateinit var viewModelFactory: ViewModelFactory
     @Inject lateinit var infoMessenger : InfoMessenger
+    @Inject lateinit var androidInjector: DispatchingAndroidInjector<Fragment>
 
+    override fun supportFragmentInjector() = androidInjector
     private val counterViewModel: CounterViewModel by lazy {
         viewModelFactory = Injection.provideViewModelFactory(this)
         ViewModelProviders.of(this, viewModelFactory).get(CounterViewModel::class.java)
@@ -31,8 +40,6 @@ class MainActivity : AppCompatActivity() {
         counterViewModel.getCounter().observe(this, changeObserver)
         lifecycle.addObserver(counterViewModel)
         my_container.setOnClickListener { counterViewModel.increment() }
-
-        DaggerMagicBox.create().inject(this)
         infoMessenger.show()
     }
 
@@ -41,9 +48,44 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-@Component(modules = [Bag::class])
-interface MagicBox {
-    fun inject(app: MainActivity)
+
+@Component(modules = [
+    AndroidSupportInjectionModule::class,
+    AppModule::class,
+    ActivityModule::class
+])
+interface AppComponent : AndroidInjector<App> {
+    // fun build(app: MainActivity)
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        fun application(application: App): Builder
+
+        fun build(): AppComponent
+    }
+
+    override fun inject(app: App)
+}
+
+@Module
+class AppModule {
+    @Provides
+    open fun providesInfo(): Info {
+        return Info("Love Dagger 2")
+    }
+}
+
+@Module
+internal abstract class ActivityModule {
+    @ContributesAndroidInjector(modules = arrayOf(MainModule::class))
+    internal abstract fun contributeMainActivity(): MainActivity
+
+}
+
+@Module
+internal abstract class MainModule {
+    // @ContributesAndroidInjector
+    // abstract fun contributeMainFragment(): MainFragment
 }
 
 class InfoMessenger @Inject constructor() {
@@ -55,11 +97,3 @@ class InfoMessenger @Inject constructor() {
 }
 
 data class Info(val text: String)
-
-@Module
-class Bag {
-    @Provides
-    open fun providesInfo(): Info {
-        return Info("Love Dagger 2")
-    }
-}
