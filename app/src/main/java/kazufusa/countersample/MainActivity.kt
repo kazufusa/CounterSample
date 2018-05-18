@@ -16,17 +16,16 @@ import dagger.android.support.AndroidSupportInjectionModule
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
-
+import javax.inject.Singleton
 
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
-    private lateinit var viewModelFactory: ViewModelFactory
+    @Inject lateinit var viewModelFactory: ViewModelFactory2
     @Inject lateinit var infoMessenger : InfoMessenger
     @Inject lateinit var androidInjector: DispatchingAndroidInjector<Fragment>
 
     override fun supportFragmentInjector() = androidInjector
     private val counterViewModel: CounterViewModel by lazy {
-        viewModelFactory = Injection.provideViewModelFactory(this)
         ViewModelProviders.of(this, viewModelFactory).get(CounterViewModel::class.java)
     }
 
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 }
 
-
+@Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,
     AppModule::class,
@@ -67,11 +66,23 @@ interface AppComponent : AndroidInjector<App> {
     override fun inject(app: App)
 }
 
-@Module
+@Module(includes = [ViewModelModule::class])
 class AppModule {
     @Provides
-    open fun providesInfo(): Info {
+    fun providesInfo(app: App): Info {
         return Info("Love Dagger 2")
+    }
+
+    @Singleton
+    @Provides
+    fun provideCountersDatabase(app: App): CountersDatabase {
+        return CountersDatabase.getInstance(app)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCountersDao(db: CountersDatabase): CountersDao {
+        return db.countersDao()
     }
 }
 
@@ -88,8 +99,7 @@ internal abstract class MainModule {
     // abstract fun contributeMainFragment(): MainFragment
 }
 
-class InfoMessenger @Inject constructor() {
-    @Inject lateinit var info: Info
+class InfoMessenger @Inject constructor(private val info : Info) {
 
     fun show(){
         println(info.text)
