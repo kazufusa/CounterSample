@@ -1,11 +1,13 @@
 package kazufusa.countersample
 
+import android.app.Application
 import android.arch.lifecycle.*
 import android.arch.persistence.room.*
 import kotlinx.coroutines.experimental.launch
 import android.content.Context
+import javax.inject.Inject
 
-class CounterViewModel(private val dataSource: CountersDao) : ViewModel(), LifecycleObserver {
+class CounterViewModel @Inject constructor(val dataSource: CountersDao) : ViewModel(), LifecycleObserver {
     private val notifier = MutableLiveData<Counter>()
 
     fun getCounter() : LiveData<Counter> {
@@ -68,27 +70,4 @@ abstract class CountersDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertCounter(counter: Counter)
-}
-
-
-class ViewModelFactory(private val dataSource: CountersDao) : ViewModelProvider.Factory {
-
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CounterViewModel::class.java)) {
-            return CounterViewModel(dataSource) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
-
-object Injection {
-    fun provideUserDataSource(context: Context): CountersDao {
-        val database = CountersDatabase.getInstance(context)
-        return database.countersDao()
-    }
-
-    fun provideViewModelFactory(context: Context): ViewModelFactory {
-        val dataSource = provideUserDataSource(context)
-        return ViewModelFactory(dataSource)
-    }
 }
