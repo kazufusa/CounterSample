@@ -1,7 +1,8 @@
 package kazufusa.countersample
 
 import dagger.android.support.DaggerApplication
-
+import kazufusa.countersample.di.applyAutoInjector
+import kazufusa.countersample.di.DaggerAppComponent
 
 class App : DaggerApplication() {
 

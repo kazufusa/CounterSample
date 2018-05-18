@@ -2,6 +2,7 @@ package kazufusa.countersample
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import junit.framework.Assert.assertEquals
+import kazufusa.countersample.ui.counter.CounterViewModel
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

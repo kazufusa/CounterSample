@@ -1,4 +1,4 @@
-package kazufusa.countersample
+package kazufusa.countersample.di
 
 import android.app.Activity
 import android.app.Application
