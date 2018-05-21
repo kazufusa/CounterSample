@@ -26,3 +26,9 @@ from https://medium.com/@elye.project/android-architecture-components-for-dummie
 # Navigation
 
 - https://blog.yagi2.com/2018/05/09/navigation-architecture-component-catch-up.html
+
+# Repository
+
+# Job scheduler/executor
+
+# Test
