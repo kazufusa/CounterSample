@@ -55,4 +55,9 @@ dependencies {
     def nav_version = "1.0.0-alpha01"
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
+
+    def retrofit_version = "2.4.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation 'com.squareup.moshi:moshi-kotlin:1.5.0'
 }

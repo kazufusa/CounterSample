@@ -9,16 +9,23 @@ import android.view.View
 import android.view.ViewGroup
 import kazufusa.countersample.R
 import kazufusa.countersample.di.Injectable
+import kazufusa.countersample.di.TestService
 import kazufusa.countersample.di.ViewModelFactory
 import kazufusa.countersample.vo.Counter
 import kotlinx.android.synthetic.main.counter_fragment.*
+import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
 class CounterFragment : Fragment(), Injectable {
     @Inject lateinit var viewModelFactory: ViewModelFactory
     lateinit var counterViewModel: CounterViewModel
+    @Inject lateinit var sss: TestService
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        launch {
+            val response = sss.currenttime().execute()
+            println("JSON" + response.body())
+        }
         val view = inflater.inflate(R.layout.counter_fragment, container, false)
 
         return view

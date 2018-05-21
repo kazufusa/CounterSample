@@ -31,4 +31,6 @@ from https://medium.com/@elye.project/android-architecture-components-for-dummie
 
 # Job scheduler/executor
 
+api fetch job(https://ntp-a1.nict.go.jp/cgi-bin/json)
+
 # Test
