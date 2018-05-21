@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/counter_fragment">
+
+    <fragment
+        android:id="@+id/counter_fragment"
+        android:name="kazufusa.countersample.ui.counter.CounterFragment"
+        android:label="counter_fragment"
+        tools:layout="@layout/counter_fragment">
+    </fragment>
+</navigation>

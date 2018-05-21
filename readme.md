@@ -22,3 +22,7 @@ from https://medium.com/@elye.project/android-architecture-components-for-dummie
 - https://qiita.com/satorufujiwara/items/0f95ccfc3820d3ee1370#dagger2
 - https://qiita.com/satorufujiwara/items/f42b176404287690f1d0
 - https://speakerdeck.com/satorufujiwara/kotlin-x-architecture-components
+
+# Navigation
+
+- https://blog.yagi2.com/2018/05/09/navigation-architecture-component-catch-up.html

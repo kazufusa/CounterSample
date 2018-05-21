@@ -3,10 +3,10 @@ package kazufusa.countersample.di
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import kazufusa.countersample.MainActivity
-import kazufusa.countersample.di.module.MainModule
+import kazufusa.countersample.di.module.FragmentBuildersModule
 
 @Module
-internal abstract class UiModule {
-    @ContributesAndroidInjector(modules = arrayOf(MainModule::class))
+internal abstract class MainActivityModule {
+    @ContributesAndroidInjector(modules = [FragmentBuildersModule::class])
     internal abstract fun contributeMainActivity(): MainActivity
 }
