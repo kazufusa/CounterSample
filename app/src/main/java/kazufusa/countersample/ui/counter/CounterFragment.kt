@@ -14,6 +14,8 @@ import kazufusa.countersample.di.ViewModelFactory
 import kazufusa.countersample.vo.Counter
 import kotlinx.android.synthetic.main.counter_fragment.*
 import kotlinx.coroutines.experimental.launch
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class CounterFragment : Fragment(), Injectable {
@@ -24,7 +26,14 @@ class CounterFragment : Fragment(), Injectable {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         launch {
             val response = sss.currenttime().execute()
-            println("JSON" + response.body())
+            val body = response?.body()
+            if (body == null || response.code() == 204) {
+            } else {
+                println("JSON " + (body.st*1000L).toLong())
+                val date = Date(body.st.toLong()*1000L)
+                val df = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+                println("JSON " + df.format(date))
+            }
         }
         val view = inflater.inflate(R.layout.counter_fragment, container, false)
 
