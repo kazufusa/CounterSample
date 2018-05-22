@@ -12,7 +12,8 @@ abstract class CountersDb : RoomDatabase() {
     abstract fun countersDao(): CountersDao
 
     companion object {
-        @Volatile private var INSTANCE: CountersDb? = null
+        @Volatile
+        private var INSTANCE: CountersDb? = null
 
         fun getInstance(context: Context): CountersDb =
                 INSTANCE ?: synchronized(this) {
@@ -23,9 +24,5 @@ abstract class CountersDb : RoomDatabase() {
                 Room.databaseBuilder(context.applicationContext,
                         CountersDb::class.java, "counter.db")
                         .build()
-
-        private fun buildInMemoryDatabase(context: Context) =
-                Room.inMemoryDatabaseBuilder(context.applicationContext,
-                        CountersDb::class.java).build()
     }
 }

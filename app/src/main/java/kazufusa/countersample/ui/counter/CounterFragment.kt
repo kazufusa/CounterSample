@@ -9,11 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import kazufusa.countersample.R
 import kazufusa.countersample.di.Injectable
-import kazufusa.countersample.di.TestService
 import kazufusa.countersample.di.ViewModelFactory
 import kazufusa.countersample.vo.Counter
 import kotlinx.android.synthetic.main.counter_fragment.*
-import kotlinx.coroutines.experimental.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -21,20 +19,9 @@ import javax.inject.Inject
 class CounterFragment : Fragment(), Injectable {
     @Inject lateinit var viewModelFactory: ViewModelFactory
     lateinit var counterViewModel: CounterViewModel
-    @Inject lateinit var sss: TestService
+    lateinit var clockViewModel: ClockViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        launch {
-            val response = sss.currenttime().execute()
-            val body = response?.body()
-            if (body == null || response.code() == 204) {
-            } else {
-                println("JSON " + (body.st*1000L).toLong())
-                val date = Date(body.st.toLong()*1000L)
-                val df = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
-                println("JSON " + df.format(date))
-            }
-        }
         val view = inflater.inflate(R.layout.counter_fragment, container, false)
 
         return view
@@ -43,18 +30,33 @@ class CounterFragment : Fragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        counterViewModel  = ViewModelProviders.of(this, viewModelFactory).get(CounterViewModel::class.java)
+        counterViewModel = ViewModelProviders.of(this, viewModelFactory).get(CounterViewModel::class.java)
         counterViewModel.getCounter().observe(this, changeObserver)
         lifecycle.addObserver(counterViewModel)
-        my_container.setOnClickListener { counterViewModel.increment() }
+
+        clockViewModel = ViewModelProviders.of(this, viewModelFactory).get(ClockViewModel::class.java)
+        clockViewModel.getClock().observe(this, changeClockObserver)
+        my_container.setOnClickListener {
+            counterViewModel.increment()
+            clockViewModel.update()
+        }
     }
 
     private val changeObserver = Observer<Counter> {
         counter -> counter?.let { incrementCount(counter.count) }
     }
 
+    private val changeClockObserver = Observer<Date> {
+        date -> date?.let {updateClock(date)}
+    }
+
     private fun incrementCount(count: Int) {
-        my_text.text = (count).toString()
+        counter_text.text = (count).toString()
+    }
+
+    private fun updateClock(date: Date) {
+        val df = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+        clock_text.text = df.format(date)
     }
 
 }
