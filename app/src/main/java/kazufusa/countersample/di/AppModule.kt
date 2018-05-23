@@ -9,7 +9,6 @@ import dagger.Provides
 import kazufusa.countersample.App
 import kazufusa.countersample.api.CurrentDateTimeService
 import kazufusa.countersample.db.*
-import kazufusa.countersample.repository.ClockRepository
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton

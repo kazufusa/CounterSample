@@ -10,11 +10,8 @@ import android.view.ViewGroup
 import kazufusa.countersample.R
 import kazufusa.countersample.di.Injectable
 import kazufusa.countersample.di.ViewModelFactory
-import kazufusa.countersample.ui.clock.ClockViewModel
 import kazufusa.countersample.vo.Counter
 import kotlinx.android.synthetic.main.counter_fragment.*
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 class CounterFragment : Fragment(), Injectable {

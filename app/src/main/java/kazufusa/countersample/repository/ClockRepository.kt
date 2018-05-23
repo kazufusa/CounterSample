@@ -19,8 +19,8 @@ class ClockRepository @Inject constructor(
         val response = currentDateTimeService.currenttime().execute()
         val body = response?.body()
         body?.let {
-            dao.insert(body)
-            dao.updateLatest(Date(body.st.toLong()*1000L))
+            dao.insert(it)
+            dao.updateLatest(Date(it.st.toLong()*1000L))
         }
     }
 }

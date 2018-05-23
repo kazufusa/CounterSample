@@ -4,6 +4,7 @@ import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.util.Log
 import kazufusa.countersample.repository.ClockRepository
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.delay
@@ -32,12 +33,13 @@ class ClockViewModel @Inject constructor(val dataSource: ClockRepository) : View
             while(updating) {
                 update()
                 delay(1, TimeUnit.SECONDS)
-                println("update clock")
+                Log.i("ClockFragment", "UPDATE CLOCK")
             }
         }
     }
 
     fun stopAutoUpdate(){
         updating = false
+        Log.i("ClockFrragment", "STOP UPDATE LOOP")
     }
 }

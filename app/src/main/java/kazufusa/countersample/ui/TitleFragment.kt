@@ -20,13 +20,13 @@ class TitleFragment : Fragment(), Injectable {
         super.onActivityCreated(savedInstanceState)
 
         btn_counter.setOnClickListener {
-            this.view?.let {
+            it?.let {
                 Navigation.findNavController(it).navigate(R.id.action_title_to_counter)
             }
         }
 
         btn_clock.setOnClickListener {
-            this.view?.let {
+            it?.let {
                 Navigation.findNavController(it).navigate(R.id.action_title_to_clock)
             }
         }
