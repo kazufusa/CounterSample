@@ -15,6 +15,7 @@ import javax.inject.Inject
 class ClockViewModel @Inject constructor(val dataSource: ClockRepository) : ViewModel(), LifecycleObserver {
     private val notifier = MutableLiveData<Date>()
     private lateinit var job: Job
+    private var updating = false
 
     fun getClock() : LiveData<Date> {
         return notifier
@@ -25,16 +26,18 @@ class ClockViewModel @Inject constructor(val dataSource: ClockRepository) : View
         notifier.postValue(dataSource.loadCurrentDateTime())
     }
 
-    fun autoUpdate(){
+    fun startAutoUpdate(){
+        updating = true
         job = launch {
-            while(true) {
+            while(updating) {
                 update()
-                delay(10, TimeUnit.SECONDS)
+                delay(1, TimeUnit.SECONDS)
+                println("update clock")
             }
         }
     }
 
-    fun stopUpdate(){
-        job.cancel()
+    fun stopAutoUpdate(){
+        updating = false
     }
 }

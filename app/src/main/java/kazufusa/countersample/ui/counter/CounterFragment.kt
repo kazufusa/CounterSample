@@ -36,11 +36,16 @@ class CounterFragment : Fragment(), Injectable {
 
         clockViewModel = ViewModelProviders.of(this, viewModelFactory).get(ClockViewModel::class.java)
         clockViewModel.getClock().observe(this, changeClockObserver)
-        clockViewModel.autoUpdate()
+        clockViewModel.startAutoUpdate()
         my_container.setOnClickListener {
             counterViewModel.increment()
-            clockViewModel.stopUpdate()
+            clockViewModel.stopAutoUpdate()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        clockViewModel.stopAutoUpdate()
     }
 
     private val changeObserver = Observer<Counter> {
