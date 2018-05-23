@@ -24,5 +24,11 @@ class TitleFragment : Fragment(), Injectable {
                 Navigation.findNavController(it).navigate(R.id.action_title_to_counter)
             }
         }
+
+        btn_clock.setOnClickListener {
+            this.view?.let {
+                Navigation.findNavController(it).navigate(R.id.action_title_to_clock)
+            }
+        }
     }
 }

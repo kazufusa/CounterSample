@@ -3,6 +3,7 @@ package kazufusa.countersample.di.module
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import kazufusa.countersample.ui.TitleFragment
+import kazufusa.countersample.ui.clock.ClockFragment
 import kazufusa.countersample.ui.counter.CounterFragment
 
 @Suppress("unused")
@@ -13,4 +14,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeTitleFragment(): TitleFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeClockFragment(): ClockFragment
 }

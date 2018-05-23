@@ -1,4 +1,4 @@
-package kazufusa.countersample.ui.counter
+package kazufusa.countersample.ui.clock
 
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LiveData

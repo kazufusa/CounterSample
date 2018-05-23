@@ -16,6 +16,13 @@
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_title_to_clock"
+            app:destination="@id/clock_fragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
 
     <fragment
@@ -23,5 +30,12 @@
         android:name="kazufusa.countersample.ui.counter.CounterFragment"
         android:label="counter_fragment"
         tools:layout="@layout/counter_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/clock_fragment"
+        android:name="kazufusa.countersample.ui.clock.ClockFragment"
+        android:label="counter_fragment"
+        tools:layout="@layout/clock_fragment">
     </fragment>
 </navigation>

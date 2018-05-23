@@ -10,25 +10,11 @@
         android:id="@+id/counter_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="counter"
+        android:text=""
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/clock_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.28" />
-
-    <TextView
-        android:id="@+id/clock_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="clock"
-        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/counter_text" />
-
-
-
+        app:layout_constraintTop_toTopOf="parent"/>
 </android.support.constraint.ConstraintLayout>
